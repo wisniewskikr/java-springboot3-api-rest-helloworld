@@ -4,5 +4,8 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
 
 FROM eclipse-temurin:21-jre
-COPY --from=builder /home/app/target/*.jar  /opt/app/*.jar
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+COPY --from=builder /home/app/target/*.jar /opt/app/app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/opt/app/app.jar"]
