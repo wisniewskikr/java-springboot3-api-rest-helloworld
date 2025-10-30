@@ -1,0 +1,16 @@
+version: "4"
+services:
+
+  helloworld:
+    image: helloworld-image:0.0.1
+    container_name: helloworld-container
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
